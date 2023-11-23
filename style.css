@@ -11,8 +11,14 @@ etchasketch red color: #f80012;
  */
 
 body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
   margin-top: 5rem;
   color: #ffff99;
+  background-image: linear-gradient(to bottom, #00f8e6, white);
 }
 
 .size-top {
@@ -44,6 +50,7 @@ body {
 .radius-bottom {
   background-color: #f80012;
 }
+
 
 .radius-top {
   border-top-left-radius: 1rem;
@@ -91,12 +98,13 @@ body {
 }
 
 button {
+  display: flex;
   background-color: white;
   border: none;
   border-radius: 100%;
   padding: 1.75rem;
   height: .5rem;
-  width: auto;
+  max-width: .5rem;
   box-shadow: 0 4px 5px black;
 }
 
@@ -110,14 +118,53 @@ button {
   margin-right: 24px;
 }
 
-.block {
-  flex-grow: 1;
+.big-block {
+  
   height: 25px;
   width: 25px;
+}
+
+.small-block {
+  
+  height: 12.5px;
+  width: 12.5px;
 }
 
 .fill {
   background-color: black;
 }
 
+.tools {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin-top: 1.5rem;
+  padding-bottom: 1rem;
+  width: 600px;
+  height: auto;
+  background-color: #f80012;
+  border-radius: 1rem;
+  gap: .5rem;
+}
+
+.tool-btns {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 1rem;
+  width: 600px;
+}
+
+.tool-titles {
+  display: flex;
+  justify-content: space-around;
+  width: 600px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.align {
+  min-width: 50px;
+  text-align: center;
+}
 
