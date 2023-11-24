@@ -119,19 +119,24 @@ button {
 }
 
 .big-block {
-  
   height: 25px;
   width: 25px;
 }
 
-.small-block {
-  
+.medium-block {
   height: 12.5px;
   width: 12.5px;
 }
 
-.fill {
-  background-color: black;
+.small-block {
+  height: 6.25px;
+  width: 6.25px;
+}
+
+.fill-black {
+}
+
+.fill-rainbow {
 }
 
 .tools {
@@ -164,7 +169,7 @@ button {
 }
 
 .align {
-  min-width: 50px;
+  min-width: 100px;
   text-align: center;
 }
 
