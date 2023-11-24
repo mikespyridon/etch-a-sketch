@@ -8,21 +8,25 @@ const eraseBtn = document.querySelector('.erase');
 const fillColor = document.querySelector('.fill');
 
 const bigBlock = {
+  name: 'bigBlock',
+  classType: 'big-block',
   size: 256,
   clicked: false
 }
 
 const mediumBlock = {
+  name: 'mediumBlock',
+  classType: 'medium-block',
   size: 1024,
   clicked: false
 }
 
 const smallBlock = {
+  name: 'smallBlock',
+  classType: 'small-block',
   size: 4096,
   clicked: false,
 }
-
-let clickedRainbow = false;
 
 function fillGrid(block) {
   if (clickedRainbow) {
@@ -36,37 +40,25 @@ function fillGrid(block) {
   }
 }
 
-function createGrid(size) {
-  if (size === bigBlock.size) {
-    for (let i = 1; i <= bigBlock.size; i += 1) {
-      const block = document.createElement('div');
-      block.classList.add('big-block')
-      frame.appendChild(block);
+function generateGrid(classType, size) {
+  for (let i = 1; i <= size; i += 1) {
+    const block = document.createElement('div');
+    block.classList.add(classType)
+    frame.appendChild(block);
 
-      block.addEventListener('mouseenter', () => {
-        fillGrid(block);
-      }, true);
-    }
-  } else if (size === mediumBlock.size) {
-    for (let i = 1; i <= mediumBlock.size; i += 1) {
-      const block = document.createElement('div');
-      block.classList.add('medium-block')
-      frame.appendChild(block);
+    block.addEventListener('mouseenter', () => {
+      fillGrid(block);
+    }, true);
+  }
+}
 
-      block.addEventListener('mouseenter', () => {
-        fillGrid(block);
-      }, true);
-    }
-  } else if (size === smallBlock.size) {
-    for (let i = 1; i <= smallBlock.size; i += 1) {
-      const block = document.createElement('div');
-      block.classList.add('small-block')
-      frame.appendChild(block);
-
-      block.addEventListener('mouseenter', () => {
-        fillGrid(block);
-      }, true);
-    }
+function createGridSize() {
+  if (bigBlock.clicked) {
+    generateGrid(bigBlock.classType, bigBlock.size);
+  } else if (mediumBlock.clicked) {
+    generateGrid(mediumBlock.classType, mediumBlock.size);
+  } else if (smallBlock.clicked) {
+    generateGrid(smallBlock.classType, smallBlock.size);
   }
 }
 
@@ -86,19 +78,30 @@ clearBtn.addEventListener('click', () => {
 });
 
 bigBtn.addEventListener('click', () => {
+  bigBlock.clicked = true;
+  mediumBlock.clicked = false;
+  smallBlock.clicked = false;
   clearWindow();
-  createGrid(bigBlock.size);
+  createGridSize(bigBlock.size);
 });
 
 mediumBtn.addEventListener('click', () => {
+  mediumBlock.clicked = true;
+  smallBlock.clicked = false;
+  bigBlock.clicked = false;
   clearWindow();
-  createGrid(mediumBlock.size);
+  createGridSize(mediumBlock.size);
 });
 
 smallBtn.addEventListener('click', () => {
+  smallBlock.clicked = true;
+  mediumBlock.clicked = false;
+  bigBlock.clicked = false;
   clearWindow();
-  createGrid(smallBlock.size);
+  createGridSize(smallBlock.size);
 });
+
+let clickedRainbow = false;
 
 colorBtn.addEventListener('click', () => {
   if (clickedRainbow) {
