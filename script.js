@@ -7,35 +7,29 @@ const colorBtn = document.querySelector('.color');
 const eraseBtn = document.querySelector('.erase');
 const fillColor = document.querySelector('.fill');
 
-const bigBlock = {
-  name: 'bigBlock',
-  classType: 'big-block',
-  size: 256,
-  clicked: false
+function generateBlockType(name, classType, size, clicked) {
+  this.name = name;
+  this.classType = classType;
+  this.size = size;
+  this.clicked = clicked;
 }
 
-const mediumBlock = {
-  name: 'mediumBlock',
-  classType: 'medium-block',
-  size: 1024,
-  clicked: false
-}
+const bigBlock = new generateBlockType("bigBlock", 'big-block', 256, false);
+const mediumBlock = new generateBlockType("mediumBlock", 'medium-block', 1024, false);
+const smallBlock = new generateBlockType("smallBlock", 'small-block', 4096, false);
 
-const smallBlock = {
-  name: 'smallBlock',
-  classType: 'small-block',
-  size: 4096,
-  clicked: false,
-}
-
-function fillGrid(block) {
+function blockColor(block) {
   if (clickedRainbow) {
     block.style.backgroundColor = randomColor();
     block.classList.remove('fill-black');
-    block.classList.add('fill-rainbow');
-  } else if (!clickedRainbow) {
+  } else if (clickedErase) {
+    block.style.backgroundColor = '#e8e8e8';
+    block.classList.remove('fill-rainbow');
+    block.classList.remove('fill-black');
+  } else {
     block.style.backgroundColor = 'black';
     block.classList.remove('fill-rainbow');
+    block.classList.remove('fill-black');
     block.classList.add('fill-black');
   }
 }
@@ -47,7 +41,7 @@ function generateGrid(classType, size) {
     frame.appendChild(block);
 
     block.addEventListener('mouseenter', () => {
-      fillGrid(block);
+      blockColor(block);
     }, true);
   }
 }
@@ -69,6 +63,7 @@ function randomColor() {
 
   return `rgb(${r}, ${g}, ${b})`;
 }
+
 function clearWindow() {
   frame.textContent = "";  
 }
@@ -81,6 +76,7 @@ bigBtn.addEventListener('click', () => {
   bigBlock.clicked = true;
   mediumBlock.clicked = false;
   smallBlock.clicked = false;
+  clickedErase = false;
   clearWindow();
   createGridSize(bigBlock.size);
 });
@@ -89,6 +85,7 @@ mediumBtn.addEventListener('click', () => {
   mediumBlock.clicked = true;
   smallBlock.clicked = false;
   bigBlock.clicked = false;
+  clickedErase = false;
   clearWindow();
   createGridSize(mediumBlock.size);
 });
@@ -97,16 +94,28 @@ smallBtn.addEventListener('click', () => {
   smallBlock.clicked = true;
   mediumBlock.clicked = false;
   bigBlock.clicked = false;
+  clickedErase = false;
   clearWindow();
   createGridSize(smallBlock.size);
 });
 
 let clickedRainbow = false;
+let clickedErase = false;
 
 colorBtn.addEventListener('click', () => {
+  clickedErase = false;
   if (clickedRainbow) {
     clickedRainbow = false;
   } else {
     clickedRainbow = true;
+  }
+});
+
+eraseBtn.addEventListener('click', () => {
+  clickedRainbow = false;
+  if (clickedErase) {
+    clickedErase= false;
+  } else {
+    clickedErase = true;
   }
 });

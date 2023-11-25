@@ -139,6 +139,9 @@ button {
 .fill-rainbow {
 }
 
+.fill-erase {
+}
+
 .tools {
   display: flex;
   flex-direction: column;
